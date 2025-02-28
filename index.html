@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glass Bridge Game</title>
+    <title>Glass Bridge Game - First Person</title>
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        body, html {
             margin: 0;
-            background-color: #f0f0f0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
         }
         .bridge {
             display: grid;
             grid-template-columns: repeat(10, 100px);
             gap: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
         .panel {
             width: 100px;
@@ -53,6 +55,26 @@
             bridge.appendChild(panel);
             panels.push(panel);
         }
+
+        // First-person controls
+        document.addEventListener('keydown', (e) => {
+            const step = 10;
+            switch (e.key) {
+                case 'ArrowUp':
+                    bridge.style.top = (parseInt(bridge.style.top) - step) + 'px';
+                    break;
+                case 'ArrowDown':
+                    bridge.style.top = (parseInt(bridge.style.top) + step) + 'px';
+                    break;
+                case 'ArrowLeft':
+                    bridge.style.left = (parseInt(bridge.style.left) - step) + 'px';
+                    break;
+                case 'ArrowRight':
+                    bridge.style.left = (parseInt(bridge.style.left) + step) + 'px';
+                    break;
+            }
+        });
     </script>
 </body>
 </html>
+
