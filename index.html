@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glass Bridge Game</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .bridge {
+            display: grid;
+            grid-template-columns: repeat(10, 100px);
+            gap: 10px;
+        }
+        .panel {
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+            border: 2px solid #000;
+            transition: background-color 0.3s;
+        }
+        .panel.break {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="bridge">
+        <!-- Panels will be added here by JavaScript -->
+    </div>
+    <script>
+        const bridge = document.querySelector('.bridge');
+        const panels = [];
+
+        // Create 10 panels
+        for (let i = 0; i < 10; i++) {
+            const panel = document.createElement('div');
+            panel.classList.add('panel');
+            panel.dataset.safe = Math.random() > 0.5 ? 'true' : 'false';
+            panel.addEventListener('click', () => {
+                if (panel.dataset.safe === 'true') {
+                    panel.style.backgroundColor = 'green';
+                } else {
+                    panel.classList.add('break');
+                }
+            });
+            bridge.appendChild(panel);
+            panels.push(panel);
+        }
+    </script>
+</body>
+</html>
